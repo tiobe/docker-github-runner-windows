@@ -1,0 +1,3 @@
+# (New-Object System.Net.WebClient).DownloadFile("https://github.com/actions/runner/releases/download/v$env:RUNNER_VERSION/actions-runner-win-x64-$env:RUNNER_VERSION.zip","actions-runner.zip")
+Invoke-WebRequest -Uri "https://github.com/actions/runner/releases/download/v$env:RUNNER_VERSION/actions-runner-win-x64-$env:RUNNER_VERSION.zip" -OutFile "actions-runner.zip"
+Expand-Archive -Path ".\\actions-runner.zip" -DestinationPath '.'

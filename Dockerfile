@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/windows/servercore:ltsc2022
 
-ARG RUNNER_VERSION="2.309.0"
+ARG RUNNER_VERSION="2.311.0"
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 
@@ -14,7 +14,8 @@ RUN .\install-choco.ps1; Remove-Item .\install-choco.ps1 -Force
 RUN choco install -y \
     git \
     gh \
-    powershell-core
+    powershell-core \
+    python
 
 RUN choco install -y visualstudio2022buildtools --package-parameters \" \
     --quiet --norestart \

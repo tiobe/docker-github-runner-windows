@@ -15,16 +15,8 @@ RUN choco install -y \
     git \
     gh \
     powershell-core \
-    python
-
-RUN choco install -y visualstudio2022buildtools --package-parameters \" \
-    --quiet --norestart \
-    --add Microsoft.VisualStudio.Workload.VisualStudioExtensionBuildTools \
-    --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools \
-    --add Microsoft.NetCore.Component.SDK \
-    --add Microsoft.Net.Component.4.6.1.TargetingPack \
-    --add Microsoft.Net.Component.4.8.TargetingPack \
-    \"
+    python \
+    docker-cli
 
 # Add MSBuild to the path
 RUN [Environment]::SetEnvironmentVariable(\"Path\", $env:Path + \";C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\", \"Machine\")

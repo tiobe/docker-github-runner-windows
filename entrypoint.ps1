@@ -88,7 +88,7 @@ if ($null -ne $TOKEN_URL) {
     $RUNNER_TOKEN = ((Invoke-WebRequest -Uri $TOKEN_URL -Method "POST" -Headers $HEADERS).Content | ConvertFrom-Json).token
   }
   catch {
-    Write-Error "Cannot obtain the token => $_.Exception.Message"
+    Write-Error "Cannot obtain the token => $_"
     exit
   }
 }

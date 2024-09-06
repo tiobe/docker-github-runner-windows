@@ -1,6 +1,7 @@
-FROM mcr.microsoft.com/windows/servercore:ltsc2022
+ARG SERVERCORE_VERSION="ltsc2022"
+ARG RUNNER_VERSION="2.319.1"
 
-ARG RUNNER_VERSION="2.311.0"
+FROM mcr.microsoft.com/windows/servercore:${SERVERCORE_VERSION}
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 
@@ -15,6 +16,7 @@ RUN choco install -y \
     git \
     gh \
     powershell-core \
+    docker-cli \
     python
 
 RUN choco install -y visualstudio2022buildtools --package-parameters \" \

@@ -18,9 +18,7 @@ jobs:
           image: tiobesoftware/github-runner-windows
           tags: ${{ github.ref_name }}-20H2
           registry: docker.io
-          buildArgs: |
-            SERVERCORE_VERSION="ltsc2022"
-            RUNNER_VERSION="${{ github.ref_name }}"
+          buildArgs: SERVERCORE_VERSION="ltsc2022",RUNNER_VERSION="${{ github.ref_name }}"
       - name: Build & push (20H2)
         uses: mr-smithers-excellent/docker-build-push@v6
         with:
@@ -29,6 +27,4 @@ jobs:
           image: tiobesoftware/github-runner-windows
           tags: ${{ github.ref_name }}, latest
           registry: docker.io
-          buildArgs: |
-            SERVERCORE_VERSION="20H2"
-            RUNNER_VERSION="${{ github.ref_name }}"
+          buildArgs: SERVERCORE_VERSION="20H2",RUNNER_VERSION="${{ github.ref_name }}"

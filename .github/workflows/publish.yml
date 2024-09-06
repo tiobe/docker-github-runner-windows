@@ -6,26 +6,27 @@ jobs:
   publish:
     runs-on: windows-latest
     steps:
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build & push (ltsc2022)
+        uses: mr-smithers-excellent/docker-build-push@v6
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
-        uses: docker/build-push-action@v6
-        with:
-          push: true
-          tags: tiobesoftware/github-runner-windows:${{ github.ref }}
-          build-args: |
+          image: tiobesoftware/github-runner-windows
+          tags: ${{ github.ref }}-20H2
+          registry: docker.io
+          buildArgs: |
             SERVERCORE_VERSION="ltsc2022"
             RUNNER_VERSION="${{ github.ref }}"
-      - name: Build and push
-        uses: docker/build-push-action@v6
+      - name: Build & push (20H2)
+        uses: mr-smithers-excellent/docker-build-push@v6
         with:
-          push: true
-          tags: tiobesoftware/github-runner-windows:${{ github.ref }}-20H2
-          build-args: |
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          image: tiobesoftware/github-runner-windows
+          tags: ${{ github.ref }}, latest
+          registry: docker.io
+          buildArgs: |
             SERVERCORE_VERSION="20H2"
             RUNNER_VERSION="${{ github.ref }}"
